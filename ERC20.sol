@@ -1,11 +1,12 @@
-// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
 
-pragma solidity ^0.6.2;
+// SPDX-License-Identifier: MIT
 
 import "./IERC20.sol";
 import "./IERC20Metadata.sol";
 import "./Context.sol";
 import "./SafeMath.sol";
+import "./Address.sol";
 
 /**
  * @dev Implementation of the {IERC20} interface.
@@ -33,12 +34,13 @@ import "./SafeMath.sol";
  */
 contract ERC20 is Context, IERC20, IERC20Metadata {
     using SafeMath for uint256;
+    using Address for address;
 
-    mapping(address => uint256) private _balances;
+    mapping(address => uint256) internal _balances;
 
     mapping(address => mapping(address => uint256)) private _allowances;
 
-    uint256 private _totalSupply;
+    uint256 internal _totalSupply;
 
     string private _name;
     string private _symbol;
@@ -52,7 +54,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
      * All two of these values are immutable: they can only be set once during
      * construction.
      */
-    constructor(string memory name_, string memory symbol_) public {
+    constructor(string memory name_, string memory symbol_) {
         _name = name_;
         _symbol = symbol_;
     }
